@@ -29,7 +29,7 @@ SECRET_KEY = 'velcdx=w#t*5lvr4$95x7_g$6*lrzurr!(o7+)3ehi$g2t_x2y'
 DEBUG = True
 
 ALLOWED_HOSTS = ['assistanceapp.herokuapp.com',
-                 '127.0.0.1', '192.168.1.4:5000']
+                 '127.0.0.1']
 
 
 # Application definition
@@ -61,7 +61,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:5500",
-    "http://192.168.1.4:8080"
+    "http://192.168.1.4:8080",
+    'http://192.168.1.4:5000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
