@@ -5,7 +5,7 @@ from rest_framework import serializers
 from rest_framework import exceptions
 from rest_framework.authtoken.models import Token
 
-from . import models
+from assistance import models
 
 
 class NumCodeSerializer(serializers.ModelSerializer):
@@ -22,23 +22,6 @@ class NumCodeSerializer(serializers.ModelSerializer):
 
 
 class AssistanceSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(many=False)
-
-    class Meta:
-        model = models.Assistance
-        fields = [
-            'id',
-            'check_time',
-            'user'
-        ]
-        extra_kwargs = {
-            'user': {
-                'required': False
-            }
-        }
-
-
-class AssistanceDownloadSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(many=False)
 
     class Meta:
