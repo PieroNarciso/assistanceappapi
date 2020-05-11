@@ -140,7 +140,7 @@ class AssistanceViewSet(viewsets.ModelViewSet):
                 check_time__range=['2020-05-09', '2020-05-10'])
         serializer = self.serializer_class(instance=queryset, many=True)
         df = pd.DataFrame(serializer.data)
-        return Response(df.to_csv(index=False), content_type='text/csv', status=status.HTTP_200_OK)
+        return Response(df.to_csv(index=False), content_type='text/plain', status=status.HTTP_200_OK)
 
 
 class CustomAuthToken(ObtainAuthToken):
