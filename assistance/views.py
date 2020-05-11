@@ -137,7 +137,7 @@ class AssistanceViewSet(viewsets.ModelViewSet):
             date_range = request.getlist('date_range')
         if len(date_range) == 1 or date_range[0] == date_range[1]:
             queryset = models.Assistance.objects.filter(
-                check_time__date=date_range[0])
+                check_time__date='2020-05-10')
         else:
             queryset = models.Assistance.objects.filter(
                 check_time__range=date_range)
