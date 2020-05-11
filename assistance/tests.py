@@ -173,4 +173,5 @@ class AssistanceViewSet(APITestCase):
         data = {'date_range': [
             datetime.date.today() - datetime.timedelta(1), datetime.date.today()]}
         response = self.client.post(url, data, format='multipart')
+        self.assertEqual(type(response.data), str)
         self.assertEqual(response.status_code, status.HTTP_200_OK)

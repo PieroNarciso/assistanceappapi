@@ -138,7 +138,7 @@ class AssistanceViewSet(viewsets.ModelViewSet):
                 check_time__date=date_range[0])
         else:
             queryset = models.Assistance.objects.filter(
-                check_time__range=['2020-05-09', '2020-05-10'])
+                check_time__range=date_range)
         serializer = self.serializer_class(instance=queryset, many=True)
         print(serializer.data)
         sys.stdout.flush()
