@@ -16,6 +16,7 @@ import pandas as pd
 
 import random
 from datetime import datetime
+import sys
 
 from assistance import serializers
 from assistance import models
@@ -139,8 +140,11 @@ class AssistanceViewSet(viewsets.ModelViewSet):
             queryset = models.Assistance.objects.filter(
                 check_time__range=['2020-05-09', '2020-05-10'])
         serializer = self.serializer_class(instance=queryset, many=True)
+        print(serializer.data)
+        sys.stdout.flush()
         df = pd.DataFrame(serializer.data)
         print(df.to_csv(index=False))
+        sys.stdout.flush()
         return Response(df.to_csv(index=False), status=status.HTTP_200_OK)
 
 
