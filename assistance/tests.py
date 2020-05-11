@@ -170,8 +170,10 @@ class AssistanceViewSet(APITestCase):
         url = self.url + 'download_data/'
         user = User.objects.get(username='non_admin')
         self.client.force_authenticate(user=user)
-        data = {'date_range': [
-            datetime.date.today() - datetime.timedelta(1), datetime.date.today()]}
-        response = self.client.post(url, data, format='multipart')
+        yesterday = str(datetime.date.today() - datetime.timedelta(1))
+        today = str(datetime.date.today())
+        data = {'date_range': [today]}
+        response = self.client.post(url, data)
+        self.assertEqual(len(response.data) > 0, True)
         self.assertEqual(type(response.data), str)
         self.assertEqual(response.status_code, status.HTTP_200_OK)

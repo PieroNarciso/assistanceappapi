@@ -16,7 +16,6 @@ import pandas as pd
 
 import random
 from datetime import datetime
-import sys
 
 from assistance import serializers
 from assistance import models
@@ -132,7 +131,10 @@ class AssistanceViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['POST'])
     def download_data(self, request, *args, **kwargs):
-        date_range = request.data.get('date_range')
+        if type(request.data) == dict:
+            date_range = request.data.get('date_range')
+        else:
+            date_range = request.getlist('date_range')
         if len(date_range) == 1 or date_range[0] == date_range[1]:
             queryset = models.Assistance.objects.filter(
                 check_time__date=date_range[0])
@@ -140,11 +142,7 @@ class AssistanceViewSet(viewsets.ModelViewSet):
             queryset = models.Assistance.objects.filter(
                 check_time__range=date_range)
         serializer = self.serializer_class(instance=queryset, many=True)
-        print(serializer.data, date_range, len(date_range), queryset)
-        sys.stdout.flush()
         df = pd.DataFrame(serializer.data)
-        print(df.to_csv(index=False))
-        sys.stdout.flush()
         return Response(df.to_csv(index=False), status=status.HTTP_200_OK)
 
 
