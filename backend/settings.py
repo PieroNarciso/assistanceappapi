@@ -63,6 +63,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:5500",
     "http://192.168.1.4:8080",
     'http://192.168.1.4:5000',
+    "http://192.168.1.2:8080",
     "http://assistanceapp.herokuapp.com",
     "https://assistanceapp.herokuapp.com"
 ]

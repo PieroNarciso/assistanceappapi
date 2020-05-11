@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth import settings
 from django.contrib.auth.models import User
 
+import random
+
 
 # Create your models here.
 class Assistance(models.Model):
@@ -14,7 +16,7 @@ class Assistance(models.Model):
 
 
 class NumCode(models.Model):
-    code = models.IntegerField()
+    code = models.IntegerField(default=random.randint(100000, 999999))
 
     def __str__(self):
         return f"{self.code}"
