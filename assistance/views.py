@@ -12,6 +12,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework import exceptions
 from rest_framework import status
 
+import pandas as pd
+
 import random
 from datetime import datetime
 
@@ -126,6 +128,19 @@ class AssistanceViewSet(viewsets.ModelViewSet):
             check_time__year=date.year, check_time__month=date.month, check_time__day=date.day)
         serializer = self.serializer_class(instance=queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=['POST'])
+    def download_data(self, request, *args, **kwargs):
+        date_range = request.data.get('date_range')
+        if len(date_range) == 1 or date_range[0] == date_range[1]:
+            queryset = models.Assistance.objects.filter(
+                check_time__date=date_range[0])
+        else:
+            queryset = models.Assistance.objects.filter(
+                check_time__range=['2020-05-09', '2020-05-10'])
+        serializer = self.serializer_class(instance=queryset, many=True)
+        df = pd.DataFrame(serializer.data)
+        return Response(df.to_csv(index=False), content_type='text/csv', status=status.HTTP_200_OK)
 
 
 class CustomAuthToken(ObtainAuthToken):

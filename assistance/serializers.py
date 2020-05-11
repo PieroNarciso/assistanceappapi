@@ -38,6 +38,23 @@ class AssistanceSerializer(serializers.ModelSerializer):
         }
 
 
+class AssistanceDownloadSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField(many=False)
+
+    class Meta:
+        model = models.Assistance
+        fields = [
+            'id',
+            'check_time',
+            'user'
+        ]
+        extra_kwargs = {
+            'user': {
+                'required': False
+            }
+        }
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
