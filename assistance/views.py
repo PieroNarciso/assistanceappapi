@@ -140,7 +140,7 @@ class AssistanceViewSet(viewsets.ModelViewSet):
             queryset = models.Assistance.objects.filter(
                 check_time__range=date_range)
         serializer = self.serializer_class(instance=queryset, many=True)
-        print(serializer.data)
+        print(serializer.data, date_range, len(date_range), queryset)
         sys.stdout.flush()
         df = pd.DataFrame(serializer.data)
         print(df.to_csv(index=False))
