@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "Lima"
+TIME_ZONE = "America/Lima"
 
 USE_I18N = True
 
