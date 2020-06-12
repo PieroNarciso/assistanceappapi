@@ -77,7 +77,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
         password = data.get('password', None)
 
         if not username and not password:
-            raise exceptions.ValidationError("Email and password are required")
+            raise exceptions.ValidationError("Username and password are required")
 
         user = authenticate(username=username, password=password)
         if user:
